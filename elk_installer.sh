@@ -1,27 +1,27 @@
 #!/bin/bash 
-#Sistem gereksinimleri yükleniyor
+#Sistem requirement configure
 yum install epel-release -y
 yum update -y
 yum install -y iptraf htop atop ngrep pcapy wget git net-tools ntp gcc bind-utils
 systemctl enable ntpd
 
-#NTP sunucusu ayarlanıyor
+#NTP server configuration
 ntpdate -u 0.centos.pool.ntp.org
 
-#SELinux kapatılıyor
+#SELinux disabled
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
-#Firewall durduruluyor
+#Firewall stopping
 systemctl disable firewalld
 systemctl stop firewalld
 
-#Java yükleniyor
+#Java installation
 yum install java-1.8.0-openjdk.x86_64 -y 
 
-#ELK GPG-KEY import ediliyor
+#ELK GPG-KEY importing
 rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
-#ELK repoları oluşturuluyor
+#ELK creating repo
 echo "[elasticsearch-2.x]
 name=Elasticsearch repository for 2.x packages
 baseurl=https://packages.elastic.co/elasticsearch/2.x/centos
@@ -44,10 +44,10 @@ gpgcheck=1
 gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
 enabled=1" > /etc/yum.repos.d/logstash.repo
 
-#ELK kuruluyor
+#ELK installing
 yum install elasticsearch.noarch logstash.noarch kibana.x86_64 -y 
 
-#ELK servisleri yapılandırılıyor/çalıştırılıyor.
+#ELK services enabled and starting
 systemctl enable elasticsearch.service
 systemctl enable logstash.service
 systemctl enable kibana.service
@@ -55,6 +55,10 @@ systemctl start elasticsearch.service
 systemctl start logstash.service
 systemctl start kibana.service
 
-echo "cluster.name: my-cluster
-node.name: node-1" > /etc/elasticsearch/elasticsearch.yml
+#Elasticsearch sysconfig configuration
+echo "ES_HEAP_SIZE=1g
+ES_STARTUP_SLEEP_TIME=5" > /etc/sysconfig/elasticsearch
 
+#Logstash sysconfig configuration
+echo "LS_USER=root
+LS_GROUP=root" > /etc/sysconfig/logstash
