@@ -1,4 +1,4 @@
-
+#!/bin/bash 
 #Sistem gereksinimleri yükleniyor
 yum install epel-release -y
 yum update -y
