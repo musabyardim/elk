@@ -2,7 +2,7 @@
 #Sistem requirement configure
 yum install epel-release -y
 yum update -y
-yum install -y iptraf htop atop ngrep pcapy wget git net-tools ntp gcc bind-utils
+yum install -y iptraf htop ngrep pcapy wget git net-tools ntp gcc
 systemctl enable ntpd
 
 #NTP server configuration
@@ -34,7 +34,7 @@ name=Kibana repository for 4.5.x packages
 baseurl=http://packages.elastic.co/kibana/4.5/centos
 gpgcheck=1
 gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
-enabled=1" > vi /etc/yum.repos.d/kibana.repo
+enabled=1" > /etc/yum.repos.d/kibana.repo
 
 
 echo "[logstash-2.3]
