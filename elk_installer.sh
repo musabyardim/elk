@@ -57,8 +57,8 @@ systemctl start kibana.service
 
 #Elasticsearch sysconfig configuration
 echo "ES_HEAP_SIZE=1g
-ES_STARTUP_SLEEP_TIME=5" > /etc/sysconfig/elasticsearch
+ES_STARTUP_SLEEP_TIME=5" >> /etc/sysconfig/elasticsearch
 
 #Logstash sysconfig configuration
 echo "LS_USER=root
-LS_GROUP=root" > /etc/sysconfig/logstash
+LS_GROUP=root" >> /etc/sysconfig/logstash
