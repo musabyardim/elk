@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum install nginx.x86_64 -y
-yum install httpd-tools.x86_64 -
+yum install httpd-tools.x86_64 -y
 
 systemctl start nginx.service
 systemctl enable nginx.service
