@@ -62,3 +62,5 @@ ES_STARTUP_SLEEP_TIME=5" >> /etc/sysconfig/elasticsearch
 #Logstash sysconfig configuration
 echo "LS_USER=root
 LS_GROUP=root" >> /etc/sysconfig/logstash
+
+##test
